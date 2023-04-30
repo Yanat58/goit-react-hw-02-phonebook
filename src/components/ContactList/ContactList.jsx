@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiUserMinus } from 'react-icons/bi';
 import css from './ContactList.module.css';
 
 export const ContactList = ({ contacts, onDeleteContact }) => {
@@ -15,7 +16,9 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
               onDeleteContact(id);
             }}
           >
-            <span>Delete</span>
+            <span>
+              <BiUserMinus className={css.btnDeleteIcon} size={20} />
+            </span>
           </button>
         </li>
       ))}

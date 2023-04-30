@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BiUserPlus } from 'react-icons/bi';
 import css from './ContactForm.module.css';
 
 export class ContactForm extends Component {
@@ -40,7 +41,7 @@ export class ContactForm extends Component {
             // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             // title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             // required
-            placeholder="Enter name"
+            placeholder="  Enter name"
             onChange={this.handelChange}
           />
         </label>
@@ -60,7 +61,8 @@ export class ContactForm extends Component {
         </label>
 
         <button className={css.btnAdd} type="submit">
-          Add contact
+          <BiUserPlus className={css.btnAddIcon} size={25} />
+          <span className={css.btnAddText}>Add contact</span>
         </button>
       </form>
     );
