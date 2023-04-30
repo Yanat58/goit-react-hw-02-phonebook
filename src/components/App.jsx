@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import Notiflix from 'notiflix';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
+import css from 'components/App.module.css';
 
 export class App extends Component {
   state = {
@@ -17,15 +19,25 @@ export class App extends Component {
   };
 
   addContact = ({ name, number }) => {
+    const { contacts } = this.state;
     const newContact = {
       id: nanoid(),
       name,
       number,
     };
+    const checkContact = contacts.some(
+      contact => contact.name.toLowerCase().trim() === name.toLowerCase().trim()
+    );
 
-    this.setState(({ contacts }) => ({
-      contacts: [newContact, ...contacts],
-    }));
+    if (name.length === 0) {
+      Notiflix.Report.info('Fields must be filled!');
+    } else if (checkContact) {
+      Notiflix.Report.warning(`${name} is already in contacts`);
+    } else {
+      this.setState(({ contacts }) => ({
+        contacts: [newContact, ...contacts],
+      }));
+    }
   };
 
   deleteContact = contactId => {
@@ -46,20 +58,13 @@ export class App extends Component {
     );
 
     return (
-      <div
-      // style={{
-      //   height: '100vh',
-      //   display: 'flex',
-      //   justifyContent: 'center',
-      //   alignItems: 'center',
-      //   fontSize: 40,
-      //   color: '#010101'
-      // }}
-      >
-        <h1>Phonebook</h1>
+      <div className={css.container}>
+        <h1 className={css.titleAplication}>
+          Phone<span className={css.titleColor}>book</span>
+        </h1>
         <ContactForm onSubmit={this.addContact} />
 
-        <h2>Contacts</h2>
+        <h2 className={css.titleSection}>Contacts</h2>
 
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
