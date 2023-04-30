@@ -25,14 +25,20 @@ export class App extends Component {
       name,
       number,
     };
-    const checkContact = contacts.some(
-      contact => contact.name.toLowerCase().trim() === name.toLowerCase().trim()
-    );
 
-    if (name.length === 0) {
+    if (name.trim() === '' || number.trim() === '') {
       Notiflix.Report.info('Fields must be filled!');
-    } else if (checkContact) {
+    } else if (
+      contacts.some(
+        contact =>
+          contact.name.toLowerCase().trim() === name.toLowerCase().trim()
+      )
+    ) {
       Notiflix.Report.warning(`${name} is already in contacts`);
+    } else if (
+      contacts.some(contact => contact.number.trim() === number.trim())
+    ) {
+      Notiflix.Report.warning(`${number} is already in contacts`);
     } else {
       this.setState(({ contacts }) => ({
         contacts: [newContact, ...contacts],
