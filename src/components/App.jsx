@@ -46,6 +46,14 @@ export class App extends Component {
     }
   };
 
+  getVisibleContact = () => {
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
   deleteContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
@@ -58,10 +66,7 @@ export class App extends Component {
 
   render() {
     const { filter } = this.state;
-    const normalizedFilter = this.state.filter.toLowerCase();
-    const visibleContacts = this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
+    const visibleContacts = this.getVisibleContact();
 
     return (
       <div className={css.container}>
