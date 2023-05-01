@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BiUserMinus } from 'react-icons/bi';
 import css from './ContactList.module.css';
 
@@ -24,4 +25,15 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
       ))}
     </ul>
   );
+};
+
+ContactList.propTypes = {
+  cpntacts: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
 };

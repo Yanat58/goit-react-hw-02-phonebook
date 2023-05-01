@@ -10,7 +10,6 @@ export class ContactForm extends Component {
 
   handelChange = e => {
     const { name, value } = e.currentTarget;
-    // console.log(e.currentTarget.value);
     this.setState({ [name]: value });
   };
 
@@ -41,7 +40,7 @@ export class ContactForm extends Component {
             // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             // title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             // required
-            placeholder="  Enter name"
+            placeholder="Enter name"
             onChange={this.handelChange}
           />
         </label>
